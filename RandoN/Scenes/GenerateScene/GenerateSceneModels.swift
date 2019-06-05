@@ -12,20 +12,32 @@
 
 import UIKit
 
-enum GenerateScene
-{
+enum GenerateScene {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
+    enum Unique {
+        struct Request {
+            let isUnique: Bool
+        }
+        struct Response {
+        }
+        struct ViewModel {
+        }
     }
-    struct Response
-    {
+    
+    enum Numbers {
+        struct Request {
+            let maybeFrom: String?
+            let maybeTo: String?
+            let maybeNums: String?
+        }
+        struct Response {
+            let numbers: [Int]?
+            let separator: String
+        }
+        struct ViewModel {
+            let numbersString: String
+        }
     }
-    struct ViewModel
-    {
-    }
-  }
+    
 }

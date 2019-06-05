@@ -12,30 +12,37 @@
 
 import UIKit
 
-protocol GenerateSceneBusinessLogic
-{
-  func doSomething(request: GenerateScene.Something.Request)
+protocol GenerateSceneBusinessLogic {
+    func saveUnique(request: GenerateScene.Unique.Request)
+    func calcNumbers(request: GenerateScene.Numbers.Request)
 }
 
-protocol GenerateSceneDataStore
-{
-  //var name: String { get set }
+protocol GenerateSceneDataStore {
+    var isUnique: Bool { get set }
 }
 
-class GenerateSceneInteractor: GenerateSceneBusinessLogic, GenerateSceneDataStore
-{
-  var presenter: GenerateScenePresentationLogic?
-  var worker: GenerateSceneWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: GenerateScene.Something.Request)
-  {
-    worker = GenerateSceneWorker()
-    worker?.doSomeWork()
+class GenerateSceneInteractor: GenerateSceneBusinessLogic, GenerateSceneDataStore {
     
-    let response = GenerateScene.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    var presenter: GenerateScenePresentationLogic?
+    var worker: GenerateSceneWorker?
+    
+    //MARK: DataStore
+    var isUnique: Bool = true
+  
+    // MARK: Do stuff
+
+    func saveUnique(request: GenerateScene.Unique.Request) {
+        self.isUnique = request.isUnique
+        let response = GenerateScene.Unique.Response()
+        presenter?.presentUnique(response: response)
+    }
+    
+    func calcNumbers(request: GenerateScene.Numbers.Request) {
+        let response = GenerateScene.Numbers.Response(
+            numbers: self.worker?.calcRandomNumbers(model: request, isUnique: self.isUnique),
+            separator: " "
+        )
+        presenter?.presentNumbers(response: response)
+    }
+    
 }

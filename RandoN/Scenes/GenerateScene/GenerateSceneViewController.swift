@@ -9,11 +9,14 @@
 //  you can apply clean architecture to your iOS and Mac projects,
 //  see http://clean-swift.com
 //
+// TODO:
+// - disperse logic through architecture
 
 import UIKit
 
 protocol GenerateSceneDisplayLogic: class {
-    func displaySomething(viewModel: GenerateScene.Something.ViewModel)
+    func displayUnique(viewModel: GenerateScene.Unique.ViewModel)
+    func displayNumbers(viewModel: GenerateScene.Numbers.ViewModel)
 }
 
 class GenerateSceneViewController: UIViewController {
@@ -53,60 +56,44 @@ class GenerateSceneViewController: UIViewController {
     }
 
     @IBAction func calculateButtonClicked(_ sender: UIButton) {
-        
-        //TODO: make array with values - remove gotten values, and every time get random value from remain array
-        
-        let maybeFrom = fromTextField.text
-        let maybeTo = toTextField.text
-        let maybeNums = numbersCountTextField.text
-        
-        var result: String = "No results"
-        var resArr: [Int] = []
-        
-        
-        if let from = maybeFrom, let fromInt = Int(from), let to = maybeTo, let toInt = Int(to), let nums = maybeNums, let numsInt = Int(nums) {
-            let minVal = min(fromInt, toInt)
-            let maxVal = max(fromInt, toInt)
-            var availableValues: [Int] = [Int](minVal...maxVal)
-
-            
-            while resArr.count < numsInt && availableValues.count > 0 {
-                let randomIndex = Int(arc4random_uniform(UInt32(availableValues.count)))
-                let nextVal = availableValues[randomIndex]
-                if self.isUnique {
-                    if !resArr.contains(nextVal) {
-                        resArr.append(nextVal)
-                        availableValues.remove(at: randomIndex)
-                    }
-                } else {
-                    resArr.append(nextVal)
-                }
-            }
-            
-            result = resArr.map({ String($0) }).joined(separator: " ")
-            
-            DispatchQueue.main.async {
-                self.resultTextField.text = result
-            }
-            
-        }
-        
+        self.calcNumbers()
     }
+    
     @IBAction func uniqueNumbersSwitchChanged(_ sender: UISwitch) {
-        self.isUnique = sender.isOn
+        self.saveUnique(isUnique: sender.isOn)
     }
     // MARK: Do life
 
-    func setupView() {
+    private func setupView() {
         self.hideKeyboardWhenTappedAround()
     }
+    
+    private func saveUnique(isUnique: Bool) {
+        let request = GenerateScene.Unique.Request(isUnique: isUnique)
+        self.interactor?.saveUnique(request: request)
+    }
 
+    private func calcNumbers() {
+        let maybeFrom = fromTextField.text
+        let maybeTo = toTextField.text
+        let maybeNums = numbersCountTextField.text
+
+        let request = GenerateScene.Numbers.Request(maybeFrom: maybeFrom, maybeTo: maybeTo, maybeNums: maybeNums)
+        self.interactor?.calcNumbers(request: request)
+    }
+    
 }
 
 extension GenerateSceneViewController: GenerateSceneDisplayLogic {
     
-    func displaySomething(viewModel: GenerateScene.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    func displayUnique(viewModel: GenerateScene.Unique.ViewModel) {
+        self.calcNumbers()
+    }
+    
+    func displayNumbers(viewModel: GenerateScene.Numbers.ViewModel) {
+        DispatchQueue.main.async {
+            self.resultTextField.text = viewModel.numbersString
+        }
     }
 
 }
