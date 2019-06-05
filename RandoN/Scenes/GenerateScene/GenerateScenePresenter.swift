@@ -12,20 +12,30 @@
 
 import UIKit
 
-protocol GenerateScenePresentationLogic
-{
-  func presentSomething(response: GenerateScene.Something.Response)
+protocol GenerateScenePresentationLogic {
+    func presentUnique(response: GenerateScene.Unique.Response)
+    func presentNumbers(response: GenerateScene.Numbers.Response)
 }
 
-class GenerateScenePresenter: GenerateScenePresentationLogic
-{
-  weak var viewController: GenerateSceneDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: GenerateScene.Something.Response)
-  {
-    let viewModel = GenerateScene.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+class GenerateScenePresenter: GenerateScenePresentationLogic {
+    weak var viewController: GenerateSceneDisplayLogic?
+
+    // MARK: Do something
+
+    func presentUnique(response: GenerateScene.Unique.Response) {
+        let viewModel = GenerateScene.Unique.ViewModel()
+        viewController?.displayUnique(viewModel: viewModel)
+    }
+    
+    func presentNumbers(response: GenerateScene.Numbers.Response) {
+        var result: String = "No results"
+        
+        if let numbers = response.numbers {
+            result = numbers.map({ String($0) }).joined(separator: response.separator)
+        }
+
+        let viewModel = GenerateScene.Numbers.ViewModel(numbersString: result)
+        viewController?.displayNumbers(viewModel: viewModel)
+    }
+    
 }
