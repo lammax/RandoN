@@ -26,6 +26,14 @@
 		04F1327522A58B8A00DFD0CD /* GenerateSceneInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1326922A58B8A00DFD0CD /* GenerateSceneInteractor.swift */; };
 		04F1327722A58BFC00DFD0CD /* GenerateSceneConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1327622A58BFC00DFD0CD /* GenerateSceneConfigurator.swift */; };
 		04F1327822A58BFC00DFD0CD /* GenerateSceneConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1327622A58BFC00DFD0CD /* GenerateSceneConfigurator.swift */; };
+		04F1327D22A5909100DFD0CD /* UIViewController+additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1327C22A5909100DFD0CD /* UIViewController+additions.swift */; };
+		04F1327E22A5909100DFD0CD /* UIViewController+additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1327C22A5909100DFD0CD /* UIViewController+additions.swift */; };
+		04F1328022A590A000DFD0CD /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1327F22A590A000DFD0CD /* AlertMessage.swift */; };
+		04F1328122A590A000DFD0CD /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1327F22A590A000DFD0CD /* AlertMessage.swift */; };
+		04F1328322A590EF00DFD0CD /* UIAlertController+adds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1328222A590EF00DFD0CD /* UIAlertController+adds.swift */; };
+		04F1328422A590EF00DFD0CD /* UIAlertController+adds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1328222A590EF00DFD0CD /* UIAlertController+adds.swift */; };
+		04F1328622A5912800DFD0CD /* UIImage+additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1328522A5912800DFD0CD /* UIImage+additions.swift */; };
+		04F1328722A5912800DFD0CD /* UIImage+additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1328522A5912800DFD0CD /* UIImage+additions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +63,10 @@
 		04F1326822A58B8A00DFD0CD /* GenerateSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateSceneViewController.swift; sourceTree = "<group>"; };
 		04F1326922A58B8A00DFD0CD /* GenerateSceneInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateSceneInteractor.swift; sourceTree = "<group>"; };
 		04F1327622A58BFC00DFD0CD /* GenerateSceneConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateSceneConfigurator.swift; sourceTree = "<group>"; };
+		04F1327C22A5909100DFD0CD /* UIViewController+additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+additions.swift"; sourceTree = "<group>"; };
+		04F1327F22A590A000DFD0CD /* AlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
+		04F1328222A590EF00DFD0CD /* UIAlertController+adds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+adds.swift"; sourceTree = "<group>"; };
+		04F1328522A5912800DFD0CD /* UIImage+additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+additions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +108,7 @@
 		04F1324122A58A4400DFD0CD /* RandoN */ = {
 			isa = PBXGroup;
 			children = (
+				04F1327A22A5901D00DFD0CD /* Common */,
 				04F1326222A58B5300DFD0CD /* Scenes */,
 				04F1324222A58A4400DFD0CD /* AppDelegate.swift */,
 				04F1324622A58A4400DFD0CD /* Main.storyboard */,
@@ -135,6 +148,33 @@
 				04F1327622A58BFC00DFD0CD /* GenerateSceneConfigurator.swift */,
 			);
 			path = GenerateScene;
+			sourceTree = "<group>";
+		};
+		04F1327922A5900900DFD0CD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				04F1328522A5912800DFD0CD /* UIImage+additions.swift */,
+				04F1328222A590EF00DFD0CD /* UIAlertController+adds.swift */,
+				04F1327C22A5909100DFD0CD /* UIViewController+additions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		04F1327A22A5901D00DFD0CD /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				04F1327B22A5902500DFD0CD /* Data */,
+				04F1327922A5900900DFD0CD /* Extensions */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		04F1327B22A5902500DFD0CD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				04F1327F22A590A000DFD0CD /* AlertMessage.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,12 +279,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				04F1327222A58B8A00DFD0CD /* GenerateSceneViewController.swift in Sources */,
+				04F1328322A590EF00DFD0CD /* UIAlertController+adds.swift in Sources */,
 				04F1326E22A58B8A00DFD0CD /* GenerateSceneRouter.swift in Sources */,
 				04F1326A22A58B8A00DFD0CD /* GenerateScenePresenter.swift in Sources */,
 				04F1327422A58B8A00DFD0CD /* GenerateSceneInteractor.swift in Sources */,
+				04F1328622A5912800DFD0CD /* UIImage+additions.swift in Sources */,
 				04F1327022A58B8A00DFD0CD /* GenerateSceneModels.swift in Sources */,
 				04F1324322A58A4400DFD0CD /* AppDelegate.swift in Sources */,
+				04F1328022A590A000DFD0CD /* AlertMessage.swift in Sources */,
 				04F1326C22A58B8A00DFD0CD /* GenerateSceneWorker.swift in Sources */,
+				04F1327D22A5909100DFD0CD /* UIViewController+additions.swift in Sources */,
 				04F1327722A58BFC00DFD0CD /* GenerateSceneConfigurator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,12 +298,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				04F1326D22A58B8A00DFD0CD /* GenerateSceneWorker.swift in Sources */,
+				04F1328422A590EF00DFD0CD /* UIAlertController+adds.swift in Sources */,
 				04F1327522A58B8A00DFD0CD /* GenerateSceneInteractor.swift in Sources */,
 				04F1327122A58B8A00DFD0CD /* GenerateSceneModels.swift in Sources */,
 				04F1327322A58B8A00DFD0CD /* GenerateSceneViewController.swift in Sources */,
+				04F1328722A5912800DFD0CD /* UIImage+additions.swift in Sources */,
 				04F1326B22A58B8A00DFD0CD /* GenerateScenePresenter.swift in Sources */,
 				04F1326F22A58B8A00DFD0CD /* GenerateSceneRouter.swift in Sources */,
+				04F1328122A590A000DFD0CD /* AlertMessage.swift in Sources */,
 				04F1327822A58BFC00DFD0CD /* GenerateSceneConfigurator.swift in Sources */,
+				04F1327E22A5909100DFD0CD /* UIViewController+additions.swift in Sources */,
 				04F1325822A58A4500DFD0CD /* RandoNTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

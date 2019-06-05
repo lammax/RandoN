@@ -19,7 +19,14 @@ protocol GenerateSceneDisplayLogic: class {
 class GenerateSceneViewController: UIViewController {
     var interactor: GenerateSceneBusinessLogic?
     var router: (NSObjectProtocol & GenerateSceneRoutingLogic & GenerateSceneDataPassing)?
+    
+    var isUnique: Bool = true
 
+    @IBOutlet weak var resultTextField: UITextField!
+    @IBOutlet weak var fromTextField: UITextField!
+    @IBOutlet weak var toTextField: UITextField!
+    @IBOutlet weak var numbersCountTextField: UITextField!
+    
     // MARK: Object lifecycle
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -42,16 +49,56 @@ class GenerateSceneViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        setupView()
     }
 
-    // MARK: Do something
+    @IBAction func calculateButtonClicked(_ sender: UIButton) {
+        
+        //TODO: make array with values - remove gotten values, and every time get random value from remain array
+        
+        let maybeFrom = fromTextField.text
+        let maybeTo = toTextField.text
+        let maybeNums = numbersCountTextField.text
+        
+        var result: String = "No results"
+        var resArr: [Int] = []
+        
+        
+        if let from = maybeFrom, let fromInt = Int(from), let to = maybeTo, let toInt = Int(to), let nums = maybeNums, let numsInt = Int(nums) {
+            let minVal = min(fromInt, toInt)
+            let maxVal = max(fromInt, toInt)
+            var availableValues: [Int] = [Int](minVal...maxVal)
 
-    //@IBOutlet weak var nameTextField: UITextField!
+            
+            while resArr.count < numsInt && availableValues.count > 0 {
+                let randomIndex = Int(arc4random_uniform(UInt32(availableValues.count)))
+                let nextVal = availableValues[randomIndex]
+                if self.isUnique {
+                    if !resArr.contains(nextVal) {
+                        resArr.append(nextVal)
+                        availableValues.remove(at: randomIndex)
+                    }
+                } else {
+                    resArr.append(nextVal)
+                }
+            }
+            
+            result = resArr.map({ String($0) }).joined(separator: " ")
+            
+            DispatchQueue.main.async {
+                self.resultTextField.text = result
+            }
+            
+        }
+        
+    }
+    @IBAction func uniqueNumbersSwitchChanged(_ sender: UISwitch) {
+        self.isUnique = sender.isOn
+    }
+    // MARK: Do life
 
-    func doSomething() {
-        let request = GenerateScene.Something.Request()
-        interactor?.doSomething(request: request)
+    func setupView() {
+        self.hideKeyboardWhenTappedAround()
     }
 
 }
